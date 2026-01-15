@@ -45,9 +45,7 @@ static GLfloat view_rotz = 0.0F;
 static GLfloat headRotation = 90.0F;
 static GLfloat zoom = -300.0f;
 
-/// <summary>
-/// This method is used to configure the initial light
-/// </summary>
+
 void initLight()
 {
     //Add ambient light
@@ -66,10 +64,6 @@ void initLight()
     glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
 }
 
-/// <summary>
-/// initialize the first configurations
-/// </summary>
-/// <param name="">void</param>
 void Initialize(void)
 {
     glEnable(GL_DEPTH_TEST);
@@ -83,11 +77,7 @@ void Initialize(void)
     }
 }
 
-/// <summary>
-/// Resize the window configurations
-/// </summary>
-/// <param name="w">int value</param>
-/// <param name="h">int value</param>
+
 void resize(int w, int h)
 {
     glViewport(0, 0, w, h);
@@ -96,18 +86,14 @@ void resize(int w, int h)
     gluPerspective(45.0, (double)w / (double)h, 1, 800.0);
 }
 
-/// <summary>
-/// ManipulateViewAngle will rotate the object according to the Angles
-/// </summary>
+
 void ManipulateViewAngle() {
     glRotatef(view_rotx, 1.0, 0.0, 0.0);//Rotate Arround X axis
     glRotatef(view_roty, 0.0, 1.0, 0.0);//Rotate Arround Y axis
     glRotatef(view_rotz, 0.0, 0.0, 1.0);//Rotate Arround Z axis
 }
 
-/// <summary>
-/// Reset Function will reset the snake size and location...
-/// </summary>
+/// Reset Function will reset the snake size and location
 void Reset() {
     _x = 5;
     _z = 10;
@@ -122,10 +108,9 @@ void Reset() {
     headRotation = 90.0F;
 }
 
-/// <summary>
+
 /// Display a welcome screen method
-/// </summary>
-/// <param name="message">string value</param>
+
 void Write(std::string message) {
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
@@ -145,18 +130,15 @@ void Write(std::string message) {
     glMatrixMode(GL_MODELVIEW);
 }
 
-/// <summary>
-/// WelcomeScreen used to call another method used Write...
-/// </summary>
+
 void WelcomeScreen() { 
     //calling Write welcome message
     Write("Welcome To Snake Game Press 's' to Start 'e' to end ");
 }
 
 
-/// <summary>
+
 /// This method is used to draw a food "circle"
-/// </summary>
 void DrawFood()
 {
     //Draw the Sphere representing the Food for the snake
@@ -169,22 +151,15 @@ void DrawFood()
     glPopMatrix();
 }
 
-/// <summary>
-/// Generates Random Numbers for the location of the food that the snake will eat
-/// </summary>
-/// <param name="high">int value</param>
-/// <param name="low">int value</param>
-/// <returns></returns>
+
 int RandomNumber(int high, int low)
 {
     return (rand() % (high - low)) + low;
 }
 
-/// <summary>
+
 /// This method is used to render the text for GameStatus to display scores and levels
-/// </summary>
-/// <param name="lvl">int value</param>
-/// <param name="points">int value</param>
+
 void renderText(int lvl, int points) {
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
@@ -206,9 +181,9 @@ void renderText(int lvl, int points) {
     glMatrixMode(GL_MODELVIEW);
 }
 
-/// <summary>
+
 /// This method is used to show levels and scores for snake
-/// </summary>
+
 void GameStatus() {
     glColor3f(0.8, 0.2, 0);
     glRasterPos2f(5, 20);
@@ -218,9 +193,9 @@ void GameStatus() {
     renderText(lvl, points);
 }
 
-/// <summary>
+
 ///Generate the New Food that the snake will eat 
-/// </summary>
+
 void newFood() {
     time_t seconds;
     time(&seconds);
@@ -230,9 +205,8 @@ void newFood() {
 }
 
 
-/// <summary>
+
 /// This method is used to draw a snake with it's properties like color , scale , translate ,etc...
-/// </summary>
 void DrawSnake() {
     int  i;
     //Drawing the head & the plane
@@ -248,7 +222,7 @@ void DrawSnake() {
     glPopMatrix();
     //Here we will draw the Head of the snake
     glColor3f(1, 0, 0);//Color it red
-    glTranslatef(_x, -10.0, _z);//Give it the location according to _x & _z
+    glTranslatef(_x, -10.0, _z);//Give it the location according to x & z
     glScalef(0.5, 0.5, 0.5);
     glutSolidSphere(10, 20, 20);//Draw the head as a sphere a litle bit bigger than the body spheres
     glRotatef(headRotation, 0.0, 1.0, 0.0);
@@ -276,10 +250,6 @@ void DrawSnake() {
     }
 }
 
-/// <summary>
-/// This method Will Check for Collision
-/// </summary>
-/// <returns>boolean value</returns>
 bool collision() {
     for (int i = 0; i < size; i++) {
         int bodyX = bodyPos[0][i];
@@ -295,12 +265,9 @@ bool collision() {
 }
 
 
-/// <summary>
-/// this function will move snake according to directions
-/// taken from keyboard hit and check collision and create new 
+
 /// food and glutTimerFunc to change speed in limited status
-/// </summary>
-/// <param name="value">is int</param>
+
 void Run(int value) {
     int i;
     _oldX[1] = _x;
@@ -420,9 +387,7 @@ void Special(int key, int x, int y) {
     }
 }
 
-/// <summary>
-/// This method is used to take an input directions
-/// </summary>
+
 /// <param name="key">is char s for start a game if 's' or 'S'</param>
 /// <param name="x">is int value</param>
 /// <param name="y">is int value</param>
